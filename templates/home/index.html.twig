@@ -87,11 +87,15 @@
                                 </div>
                                 <div class="widget-content">
                                     <div class = "col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 pb-3">
-                                        <select id = 'select' class="form-control basic">
-                                            {% for option in countries %}
-                                                <option class="option" value={{ option }}>{{ option }}</option>
-                                            {% endfor %}
-                                        </select>
+                                        <form id="form" method="post" action="{{ path('home') }}">
+
+                                            <select id = 'select' class="form-control basic" name='option'>
+                                                {% for option in countries %}
+                                                    <option class="option" value={{ option }}>{{ option }}</option>
+                                                {% endfor %}
+                                            </select>
+
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -191,5 +195,22 @@
     </div>
     <!-- END MAIN CONTAINER -->
 
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+
+            $( "#select" ).change(function() {
+
+                $country = $(this).children("option:selected").val();
+
+                $.ajax({
+                    url : '{{ path('home') }}',
+                    type : 'POST',
+                    data : $country
+                });
+            });
+
+        });
+    </script>
 
 {% endblock %}

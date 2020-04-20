@@ -15,6 +15,9 @@ class HomeController extends AbstractController
      */
     public function index(Request $request)
     {
+
+        $country = $request->request->get('option');
+
         $client = HttpClient::create();
 
         $response = $client->request('GET', 'https://pomber.github.io/covid19/timeseries.json');
@@ -24,11 +27,25 @@ class HomeController extends AbstractController
 
         $countries = array_keys($decodedData);
 
-        foreach($decodedData['Afghanistan'] as $value){
+        $defaultCountry = array_key_first($decodedData);
 
-          $infected = $value['confirmed'];
-          $recovered = $value['recovered'];
-          $deaths = $value['deaths'];
+        if ($country !== null) {
+
+          foreach($decodedData[$country] as $value){
+
+            $infected = $value['confirmed'];
+            $recovered = $value['recovered'];
+            $deaths = $value['deaths'];
+          }
+
+        } else {
+
+          foreach($decodedData[$defaultCountry] as $value){
+
+            $infected = $value['confirmed'];
+            $recovered = $value['recovered'];
+            $deaths = $value['deaths'];
+          }
         }
 
         $fatality = ($deaths / $infected) * 100;
