@@ -203,9 +203,15 @@
                 let country = $(this).children("option:selected").val();
 
                 $.ajax({
-                    url : '{{ path('home') }}',
+                    url : '{{ path('changeCountry') }}',
                     type : 'POST',
-                    data : {country: country}
+                    data : {country: country},
+                    success: function (data) {
+                        $('#report').text(data.infected);
+                        $('#recover').text(data.recovered);
+                        $('#death').text(data.fatality);
+                    },
+
                 });
             });
 
