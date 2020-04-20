@@ -42,7 +42,7 @@
                                 <div class="widget widget-one_hybrid widget-followers">
                                     <div class="widget-heading">
                                         <h5 class="">Infected</h5>
-                                        <p id = 'report' class="w-value"></p>
+                                        <p id = 'report' class="w-value">{{ infected }}</p>
                                     </div>
                                     <div class="widget-content">
                                         <div class="w-chart">
@@ -55,7 +55,7 @@
                                 <div class="widget widget-one_hybrid widget-referral">
                                     <div class="widget-heading">
                                         <h5 class="">Recovered</h5>
-                                        <p id = 'recover' class="w-value"></p>
+                                        <p id = 'recover' class="w-value">{{ recovered }}</p>
                                     </div>
                                     <div class="widget-content">
                                         <div class="w-chart">
@@ -68,7 +68,7 @@
                                 <div class="widget widget-one_hybrid widget-engagement">
                                     <div class="widget-heading">
                                         <h5 class="">Fatality Rate</h5>
-                                        <p id = 'death' class="w-value"></p>
+                                        <p id = 'death' class="w-value">{{ deaths | round(2, 'floor') }} %</p>
                                     </div>
                                     <div class="widget-content">
                                         <div class="w-chart">
@@ -89,7 +89,7 @@
                                     <div class = "col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 pb-3">
                                         <select id = 'select' class="form-control basic">
                                             {% for option in countries %}
-                                                <option value={{ option }}>{{ option }}</option>
+                                                <option class="option" value={{ option }}>{{ option }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -190,4 +190,6 @@
 
     </div>
     <!-- END MAIN CONTAINER -->
+
+
 {% endblock %}

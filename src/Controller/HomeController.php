@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpClient\HttpClient;
 
@@ -12,7 +13,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/home", name="home")
      */
-    public function index()
+    public function index(Request $request)
     {
         $client = HttpClient::create();
 
@@ -22,6 +23,17 @@ class HomeController extends AbstractController
         $decodedData = json_decode($data, true);
 
         $countries = array_keys($decodedData);
+
+        foreach($decodedData['Afghanistan'] as $value){
+
+          $infected = $value['confirmed'];
+          $recovered = $value['recovered'];
+          $deaths = $value['deaths'];
+        }
+
+        $fatality = ($deaths / $infected) * 100;
+
+        // NEWS SECTION
 
         $response = $client->request('GET', 'http://newsapi.org/v2/top-headlines?country=fr&category=health&q=covid&apiKey=154a3122f10644b5ada441ea0aa94fe3');
 
@@ -35,6 +47,9 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
           'data' => $decodedData,
+          'infected' => $infected,
+          'recovered' => $recovered,
+          'deaths' => $fatality,
           'countries' => $countries,
           'articles' => $content,
         ]);
