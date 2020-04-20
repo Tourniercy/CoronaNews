@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpClient\HttpClient;
-use Knp\Component\Pager\PaginatorInterface;
 
 
 class HomeController extends AbstractController
@@ -15,7 +14,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/home", name="home")
      */
-    public function index(Request $request, PaginatorInterface $paginator)
+    public function index(Request $request)
     {
 
         $client = HttpClient::create();
@@ -45,8 +44,6 @@ class HomeController extends AbstractController
           $array[$key] = $lastData;
         }
 
-        dump($array);
-
         $fatality = ($deaths / $infected) * 100;
 
         // NEWS SECTION
@@ -55,14 +52,8 @@ class HomeController extends AbstractController
 
         $content = $response->toArray();
 
-        $rows = $paginator->paginate(
-          $array,
-          $request->query->getInt('page', 1),
-          6
-        );
-
         return $this->render('home/index.html.twig', [
-          'data' => $rows,
+          'data' => $array,
           'infected' => $infected,
           'recovered' => $recovered,
           'deaths' => $fatality,
