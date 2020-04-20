@@ -56,9 +56,9 @@ class HomeController extends AbstractController
         $response = $client->request('GET', 'http://newsapi.org/v2/top-headlines?country=fr&category=health&q=covid&apiKey=154a3122f10644b5ada441ea0aa94fe3');
 
         $content = $response->toArray();
-
+//        dd($decodedData[$defaultCountry]);
         return $this->render('home/index.html.twig', [
-          'data' => $decodedData,
+          'data' => $decodedData[$defaultCountry],
           'infected' => $infected,
           'recovered' => $recovered,
           'deaths' => $fatality,
@@ -88,6 +88,6 @@ class HomeController extends AbstractController
               }
 
             $fatality = ($deaths / $infected) * 100;
-            return $this->json(['infected' => $infected,'recovered' => $recovered,'deaths' => $deaths,'fatality' => round($fatality,2)]);
+            return $this->json(['infected' => $infected,'recovered' => $recovered,'deaths' => $deaths,'fatality' => round($fatality,2),'data' => $decodedData[$country]]);
     }
 }

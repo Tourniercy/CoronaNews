@@ -28,7 +28,7 @@
 
                 <div class="page-header">
                     <div class="page-title">
-                        <h3>Covid-19 Cases Around The World</h3>
+                        <h3>Vue d'ensemble des cas dans le monde</h3>
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@
 
                                             <select id = 'select' class="form-control basic" name='option'>
                                                 {% for option in countries %}
-                                                    <option class="option" value={{ option }}>{{ option }}</option>
+                                                    <option class="option" value="{{ option }}">{{ option }}</option>
                                                 {% endfor %}
                                             </select>
 
@@ -110,7 +110,7 @@
                             </div>
 
                             <div class="widget-content">
-                                <div id="uniqueVisits1"></div>
+                                <div id="cases-stats"></div>
                             </div>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                             </div>
 
                             <div class="widget-content">
-                                <div id="uniqueVisits2"></div>
+                                <div id="recoverdeath-stats"></div>
                             </div>
                         </div>
                     </div>
@@ -153,7 +153,7 @@
                     </div>
                     <div class = 'col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing'>
                         <div class="page-title">
-                            <h3>Latest News</h3>
+                            <h3>Actualités du jour</h3>
                         </div>
                     </div>
                     {% for article in articles.articles|slice(0, 3) %}
@@ -171,7 +171,7 @@
                                             <div  id= 'author1' class="user-name">{{ article.author }}</div>
                                         </div>
                                     </div>
-                                    <a id = 'link1' class="btn btn-outline-success mt-auto" href="{{ article.url }}" target = '_blank'>Read More</a>
+                                    <a id = 'link1' class="btn btn-outline-success mt-auto" href="{{ article.url }}" target = '_blank'>Lire la suite</a>
                                 </div>
                             </div>
                         </div>
@@ -197,6 +197,182 @@
 
     <script>
         $(document).ready(function(){
+            var data = {{ data|json_encode|raw }};
+            confirmed = [];
+            date = [];
+            recovered = [];
+            death = [];
+            $.each(data, function( index, value ) {
+                date.push(value.date);
+                confirmed.push(value.confirmed);
+                recovered.push(value.recovered);
+                death.push(value.deaths);
+            });
+
+
+            var d_1options1 = {
+                chart: {
+                    id: 'chart1',
+                    height: 400,
+                    type: 'area',
+                    zoom: {
+                        enabled: true,
+                        type: 'xy',
+                    },
+                    dropShadow: {
+                        enabled: true,
+                        top: 1,
+                        left: 1,
+                        blur: 1,
+                        color: '#515365',
+                        opacity: 0.3,
+                    }
+                },
+                colors: ['#357ffa'],
+                dataLabels: {
+                    enabled: false
+                },
+                legend: {
+                    position: 'bottom',
+                    horizontalAlign: 'center',
+                    fontSize: '14px',
+                    markers: {
+                        width: 10,
+                        height: 10,
+                    },
+                    itemMargin: {
+                        horizontal: 0,
+                        vertical: 8
+                    }
+                },
+                grid: {
+                    borderColor: '#191e3a',
+                },
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                series: [{
+                    name: 'Confirmed Cases',
+                    data: confirmed
+                }],
+                xaxis: {
+                    type: 'datetime',
+                    categories: date,
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shade: 'light',
+                        type: 'vertical',
+                        shadeIntensity: 0.3,
+                        inverseColors: false,
+                        opacityFrom: 1,
+                        opacityTo: 0.8,
+                        stops: [0, 100]
+                    }
+                },
+                tooltip: {
+                    theme: 'dark',
+                    y: {
+                        formatter: function(val) {
+                            return val
+                        }
+                    }
+                }
+            }
+
+            var chart = new ApexCharts(document.querySelector("#cases-stats"), d_1options1);
+
+            chart.render();
+
+            var d_1options2 = {
+                chart: {
+                    id: 'chart2',
+                    height: 400,
+                    type: 'area',
+                    zoom: {
+                        enabled: true,
+                        type: 'xy',
+                    },
+                    dropShadow: {
+                        enabled: true,
+                        top: 1,
+                        left: 1,
+                        blur: 1,
+                        color: '#515365',
+                        opacity: 0.3,
+                    }
+                },
+                colors: ['#8B0000', '#BFFF00'],
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        endingShape: 'rounded'
+                    },
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                legend: {
+                    position: 'bottom',
+                    horizontalAlign: 'center',
+                    fontSize: '14px',
+                    markers: {
+                        width: 10,
+                        height: 10,
+                    },
+                    itemMargin: {
+                        horizontal: 10,
+                        vertical: 8
+                    }
+                },
+                grid: {
+                    borderColor: '#191e3a',
+                },
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                series: [{
+                    name: 'Death Counts',
+                    data: death
+                }, {
+                    name: 'Number of Patients That Recover',
+                    data: recovered
+                }],
+                xaxis: {
+                    type: 'datetime',
+                    categories: date,
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shade: 'dark',
+                        type: 'vertical',
+                        shadeIntensity: 0.3,
+                        inverseColors: false,
+                        opacityFrom: 1,
+                        opacityTo: 0.8,
+                        stops: [0, 100]
+                    }
+                },
+                tooltip: {
+                    theme: 'dark',
+                    y: {
+                        formatter: function(val) {
+                            return val
+                        }
+                    }
+                }
+            }
+
+            chart = new ApexCharts(document.querySelector("#recoverdeath-stats"), d_1options2);
+
+            chart.render();
 
             $( "#select" ).change(function() {
 
@@ -209,7 +385,27 @@
                     success: function (data) {
                         $('#report').text(data.infected);
                         $('#recover').text(data.recovered);
-                        $('#death').text(data.fatality);
+                        $('#death').text(data.fatality+' %');
+                        var data = data.data;
+                        confirmed = [];
+                        date = [];
+                        recovered = [];
+                        death = [];
+                        $.each(data, function( index, value ) {
+                            date.push(value.date);
+                            confirmed.push(value.confirmed);
+                            recovered.push(value.recovered);
+                            death.push(value.deaths);
+                        });
+                        ApexCharts.exec('chart1', "updateSeries", [{
+                            data: confirmed
+                        }]);
+                        ApexCharts.exec('chart2', "updateSeries", [{
+                            data: death
+                        }, {
+                            data: recovered
+                        }]);
+
                     },
 
                 });
