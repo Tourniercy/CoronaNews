@@ -28,7 +28,7 @@
 
                 <div class="page-header">
                     <div class="page-title">
-                        <h3>Vue d'ensemble des cas dans le monde</h3>
+                        <h3>Vue d'ensemble des cas dans le monde par pays</h3>
                     </div>
                 </div>
 
@@ -36,51 +36,8 @@
 
 
                 <div class="row layout-top-spacing">
-                    <div class="col-xl-8 col-lg-8 col-md-6 col-sm-6 col-6 layout-spacing">
-                        <div class="row widget-statistic">
-                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-                                <div class="widget widget-one_hybrid widget-followers">
-                                    <div class="widget-heading">
-                                        <h5 class="">Infectés</h5>
-                                        <p id = 'report' class="w-value">{{ infected }}</p>
-                                    </div>
-                                    <div class="widget-content">
-                                        <div class="w-chart">
-                                            <div id="hybrid_followers"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-                                <div class="widget widget-one_hybrid widget-referral">
-                                    <div class="widget-heading">
-                                        <h5 class="">Guéri</h5>
-                                        <p id = 'recover' class="w-value">{{ recovered }}</p>
-                                    </div>
-                                    <div class="widget-content">
-                                        <div class="w-chart">
-                                            <div id="hybrid_followers1"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-                                <div class="widget widget-one_hybrid widget-engagement">
-                                    <div class="widget-heading">
-                                        <h5 class="">Taux de létalité</h5>
-                                        <p id = 'death' class="w-value">{{ deaths | round(2, 'floor') }} %</p>
-                                    </div>
-                                    <div class="widget-content">
-                                        <div class="w-chart">
-                                            <div id="hybrid_followers3"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 layout-spacing">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="nopadding col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="widget widget-one_hybrid widget-followers">
                                 <div class="widget-heading">
                                     <h5>Pays</h5>
@@ -101,6 +58,74 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-xl-8 col-lg-8 col-md-6 col-sm-6 col-6 layout-spacing">
+                        <div class="row widget-statistic">
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                                <div class="widget widget-one_hybrid widget-followers">
+                                    <div class="widget-heading">
+                                        <div class="col-12">
+                                            <div class="row">
+                                        <div class="col-6">
+                                            <h5 class="">Infectés</h5>
+                                            <p id = 'report' class="w-value">{{ infected }}</p>
+                                        </div>
+                                        <div class="col-6 pull-right">
+                                            <img class="float-right" src="{{ asset('images/corona-icon.svg') }}"/>
+                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="widget-content">
+                                        <div class="w-chart">
+                                            <div id="hybrid_followers"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                                <div class="widget widget-one_hybrid widget-referral">
+                                    <div class="widget-heading">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h5 class="">Guéris</h5>
+                                                    <p id = 'recover' class="w-value">{{ recovered }}</p>
+                                                </div>
+                                                <div class="col-6 pull-right">
+                                                    <img class="float-right" src="{{ asset('images/recovered.svg') }}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="widget-content">
+                                        <div class="w-chart">
+                                            <div id="hybrid_followers1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                                <div class="widget widget-one_hybrid widget-engagement">
+                                    <div class="widget-heading">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h5 class="">Taux de létalité</h5>
+                                                    <p id = 'death' class="w-value">{{ deaths | round(2, 'floor') }} %</p>
+                                                </div>
+                                                <div class="col-6 pull-right">
+                                                    <img class="float-right" style="width: 42px" src="{{ asset('images/cancel.svg') }}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
                         <div class="widget widget-chart-three">
                             <div class="widget-heading">
