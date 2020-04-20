@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpClient\HttpClient;
+
 
 class HomeController extends AbstractController
 {
@@ -12,8 +14,17 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+        $client = HttpClient::create();
+        $response = $client->request('GET', 'https://pomber.github.io/covid19/timeseries.json');
+        $data = $response->getContent();
+
+        $decodedData = json_decode($data, true);
+
+        $countries = array_keys($decodedData);
+
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+              'data' => $decodedData,
+              'countries' => $countries
+          ]);
     }
 }

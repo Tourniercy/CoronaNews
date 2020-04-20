@@ -12,7 +12,7 @@
     <div class="header-container">
         <header class="header navbar navbar-expand-sm">
             <div class="nav-logo align-self-center">
-                <a class="navbar-brand" href="index-2.html"><img alt="logo" src="assets/img/logo.svg"> <span class="navbar-brand-name">   How Bad Is It ?</span></a>
+                <a class="navbar-brand" href="index-2.html"><img alt="logo" src="assets/img/logo.svg"> <span class="navbar-brand-name">How Bad Is It ?</span></a>
             </div>
         </header>
     </div>
@@ -44,7 +44,7 @@
                                 <div class="widget widget-one_hybrid widget-followers">
                                     <div class="widget-heading">
                                         <h5 class="">Infected</h5>
-                                        <p id = 'report' class="w-value"></p>
+                                        <p id = 'report' class="w-value">10</p>
                                     </div>
                                     <div class="widget-content">
                                         <div class="w-chart">
@@ -90,6 +90,9 @@
                                 <div class="widget-content">
                                     <div class = "col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 pb-3">
                                         <select id = 'select' class="form-control basic">
+                                            {% for option in countries %}
+                                                <option value={{ option }}>{{ option }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>
