@@ -146,8 +146,18 @@
                                     </tr>
                                     </thead>
                                     <tbody id ='tbody'>
+                                    {% for i in data %}
+                                    <tr>
+                                        <td>{{ i.0 }}</td>
+                                        <td>{{ i.confirmed }}</td>
+                                        <td>{{ i.deaths }}</td>
+                                        <td>{{ i.recovered }}</td>
+                                        <td>{{ (i.deaths / i.confirmed * 100) | round(2, 'floor') }} %</td>
+                                    </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
+{#                                {{ knp_pagination_render(data) }}#}
                             </div>
                         </div>
                     </div>
