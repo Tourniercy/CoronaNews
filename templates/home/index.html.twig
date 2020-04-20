@@ -8,13 +8,219 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <!--  BEGIN NAVBAR  -->
+    <div class="header-container">
+        <header class="header navbar navbar-expand-sm">
+            <div class="nav-logo align-self-center">
+                <a class="navbar-brand" href="index-2.html"><img alt="logo" src="assets/img/logo.svg"> <span class="navbar-brand-name">   How Bad Is It ?</span></a>
+            </div>
+        </header>
+    </div>
+    <!--  END NAVBAR  -->
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Cyril/WebstormProjects/CoronaNews/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Cyril/WebstormProjects/CoronaNews/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN CONTENT AREA  -->
+        <div id="content" class="main-content">
+            <div class="layout-px-spacing mb-5">
+
+                <div class="page-header">
+                    <div class="page-title">
+                        <h3>Covid-19 Cases Around The World</h3>
+                    </div>
+                </div>
+
+                <!-- CONTENT AREA -->
+
+
+                <div class="row layout-top-spacing">
+                    <div class="col-xl-8 col-lg-8 col-md-6 col-sm-6 col-6 layout-spacing">
+                        <div class="row widget-statistic">
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                                <div class="widget widget-one_hybrid widget-followers">
+                                    <div class="widget-heading">
+                                        <h5 class="">Infected</h5>
+                                        <p id = 'report' class="w-value"></p>
+                                    </div>
+                                    <div class="widget-content">
+                                        <div class="w-chart">
+                                            <div id="hybrid_followers"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                                <div class="widget widget-one_hybrid widget-referral">
+                                    <div class="widget-heading">
+                                        <h5 class="">Recovered</h5>
+                                        <p id = 'recover' class="w-value"></p>
+                                    </div>
+                                    <div class="widget-content">
+                                        <div class="w-chart">
+                                            <div id="hybrid_followers1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                                <div class="widget widget-one_hybrid widget-engagement">
+                                    <div class="widget-heading">
+                                        <h5 class="">Fatality Rate</h5>
+                                        <p id = 'death' class="w-value"></p>
+                                    </div>
+                                    <div class="widget-content">
+                                        <div class="w-chart">
+                                            <div id="hybrid_followers3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 layout-spacing">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="widget widget-one_hybrid widget-followers">
+                                <div class="widget-heading">
+                                    <h5>Country Name</h5>
+                                </div>
+                                <div class="widget-content">
+                                    <div class = "col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 pb-3">
+                                        <select id = 'select' class="form-control basic">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-chart-three">
+                            <div class="widget-heading">
+                                <div class="">
+                                    <h5 class="">Confirmed Covid-19 Cases</h5>
+                                </div>
+                            </div>
+
+                            <div class="widget-content">
+                                <div id="uniqueVisits1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-chart-three">
+                            <div class="widget-heading">
+                                <div class="">
+                                    <h5 class="">Recovered Cases & Death</h5>
+                                </div>
+                            </div>
+
+                            <div class="widget-content">
+                                <div id="uniqueVisits2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget-content widget-content-area br-6">
+                            <div class="widget-heading">
+                                <div class="">
+                                    <h5 class="">Country Overviews</h5>
+                                </div>
+                            </div>
+                            <div class="table-responsive mb-4 mt-4">
+                                <table id="zero-config" class="table table-hover" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Country</th>
+                                        <th>Confirmed Cases</th>
+                                        <th>Death</th>
+                                        <th>Recovered</th>
+                                        <th>Mortality Rate ( % )</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id ='tbody'>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = 'col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing'>
+                        <div class="page-title">
+                            <h3>Latest News</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <div class="card h-100 component-card_9">
+                            <img id = 'img1' src="assets/img/grid-blog-style-3.jpg" class="card-img-1" alt="widget-card-2">
+                            <div class="card-body d-flex flex-column">
+                                <p id = 'date1' class="meta-date">25 Jan 2020</p>
+
+                                <h5 id = 'title1' class="card-title">How to Start a Blog in 5 Easy Steps.</h5>
+                                <p id = 'text1' class="card-text">Vestibulum vestibulum tortor ut eros tincidunt, ut rutrum elit volutpat.</p>
+
+                                <div class="meta-info">
+                                    <div class="meta-user">
+                                        <div  id= 'author1' class="user-name">Luke Ivory</div>
+                                    </div>
+                                </div>
+                                <a id = 'link1' class="btn btn-outline-success mt-auto" target = '_blank'>Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <div class="card h-100 component-card_9">
+                            <img id = 'img2' src="assets/img/grid-blog-style-3.jpg" class="card-img-1" alt="widget-card-2">
+                            <div class="card-body d-flex flex-column">
+                                <p id = 'date2' class="meta-date">25 Jan 2020</p>
+
+                                <h5 id = 'title2' class="card-title">How to Start a Blog in 5 Easy Steps.</h5>
+                                <p id = 'text2' class="card-text">Vestibulum vestibulum tortor ut eros tincidunt, ut rutrum elit volutpat.</p>
+
+                                <div class="meta-info">
+                                    <div class="meta-user">
+                                        <div  id= 'author2' class="user-name">Luke Ivory</div>
+                                    </div>
+                                </div>
+                                <a id = 'link2' class="btn btn-outline-success mt-auto" target = '_blank'>Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <div class="card h-100 component-card_9">
+                            <img id = 'img3' src="assets/img/grid-blog-style-3.jpg" class="card-img-1" alt="widget-card-2">
+                            <div class="card-body d-flex flex-column">
+                                <p id = 'date3' class="meta-date">25 Jan 2020</p>
+
+                                <h5 id = 'title3' class="card-title">How to Start a Blog in 5 Easy Steps.</h5>
+                                <p  id = 'text3' class="card-text">Vestibulum vestibulum tortor ut eros tincidunt, ut rutrum elit volutpat.</p>
+
+                                <div class="meta-info">
+                                    <div class="meta-user">
+                                        <div id= 'author3'  class="user-name">Luke Ivory</div>
+                                    </div>
+                                </div>
+                                <a id = 'link3' class="btn btn-outline-success mt-auto" target = '_blank'>Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- CONTENT AREA -->
+            <div class="footer-wrapper">
+                <div class="footer-section f-section-1">
+                    <p class="">Copyright © 2020 <a target="_blank" href="">Faizal Azman</a>, All rights reserved.</p>
+                </div>
+                <div class="footer-section f-section-2">
+                    <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
+                </div>
+            </div>
+        </div>
+        <!--  END CONTENT AREA  -->
+
+    </div>
+    <!-- END MAIN CONTAINER -->
 {% endblock %}
