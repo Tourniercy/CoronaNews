@@ -200,12 +200,12 @@
 
             $( "#select" ).change(function() {
 
-                $country = $(this).children("option:selected").val();
+                let country = $(this).children("option:selected").val();
 
                 $.ajax({
                     url : '{{ path('home') }}',
                     type : 'POST',
-                    data : $country
+                    data : country
                 });
             });
 
