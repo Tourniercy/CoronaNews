@@ -197,7 +197,7 @@
 
     <script>
         $(document).ready(function(){
-            var data = {{ data|json_encode|raw }};
+            var data = {{ stats|json_encode|raw }};
             confirmed = [];
             date = [];
             recovered = [];

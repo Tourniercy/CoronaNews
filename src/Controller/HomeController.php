@@ -58,7 +58,7 @@ class HomeController extends AbstractController
         $content = $response->toArray();
 //        dd($decodedData[$defaultCountry]);
         return $this->render('home/index.html.twig', [
-          'data' => $decodedData[$defaultCountry],
+          'stats' => $decodedData[$defaultCountry],
           'infected' => $infected,
           'recovered' => $recovered,
           'deaths' => $fatality,
