@@ -10,7 +10,7 @@
     <div class="header-container">
         <header class="header navbar navbar-expand-sm">
             <div class="nav-logo align-self-center">
-                <a class="navbar-brand" href="index-2.html"><img src="{{ asset('images/logo.png') }}" /> <span class="navbar-brand-name">CoronaNews</span></a>
+                <a class="navbar-brand" href="#"><img src="{{ asset('images/logo.png') }}" /> <span class="navbar-brand-name">CoronaNews</span></a>
             </div>
         </header>
     </div>
@@ -41,7 +41,7 @@
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
                                 <div class="widget widget-one_hybrid widget-followers">
                                     <div class="widget-heading">
-                                        <h5 class="">Infected</h5>
+                                        <h5 class="">Infectés</h5>
                                         <p id = 'report' class="w-value">{{ infected }}</p>
                                     </div>
                                     <div class="widget-content">
@@ -54,7 +54,7 @@
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
                                 <div class="widget widget-one_hybrid widget-referral">
                                     <div class="widget-heading">
-                                        <h5 class="">Recovered</h5>
+                                        <h5 class="">Guéri</h5>
                                         <p id = 'recover' class="w-value">{{ recovered }}</p>
                                     </div>
                                     <div class="widget-content">
@@ -67,7 +67,7 @@
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
                                 <div class="widget widget-one_hybrid widget-engagement">
                                     <div class="widget-heading">
-                                        <h5 class="">Fatality Rate</h5>
+                                        <h5 class="">Taux de létalité</h5>
                                         <p id = 'death' class="w-value">{{ deaths | round(2, 'floor') }} %</p>
                                     </div>
                                     <div class="widget-content">
@@ -83,7 +83,7 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="widget widget-one_hybrid widget-followers">
                                 <div class="widget-heading">
-                                    <h5>Country Name</h5>
+                                    <h5>Pays</h5>
                                 </div>
                                 <div class="widget-content">
                                     <div class = "col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 pb-3">
@@ -105,7 +105,7 @@
                         <div class="widget widget-chart-three">
                             <div class="widget-heading">
                                 <div class="">
-                                    <h5 class="">Confirmed Covid-19 Cases</h5>
+                                    <h5 class="">Cas atteints du COVID-19</h5>
                                 </div>
                             </div>
 
@@ -118,7 +118,7 @@
                         <div class="widget widget-chart-three">
                             <div class="widget-heading">
                                 <div class="">
-                                    <h5 class="">Recovered Cases & Death</h5>
+                                    <h5 class="">Personnes guéris et décédés du COVID-19</h5>
                                 </div>
                             </div>
 
@@ -131,18 +131,18 @@
                         <div class="widget-content widget-content-area br-6">
                             <div class="widget-heading">
                                 <div class="">
-                                    <h5 class="">Country Overviews</h5>
+                                    <h5 class="">Statistiques par pays</h5>
                                 </div>
                             </div>
                             <div class="table-responsive mb-4 mt-4">
                                 <table id="zero-config" class="table table-hover" style="width:100%">
                                     <thead>
                                     <tr>
-                                        <th>Country</th>
-                                        <th>Confirmed Cases</th>
-                                        <th>Death</th>
-                                        <th>Recovered</th>
-                                        <th>Mortality Rate ( % )</th>
+                                        <th>Pays</th>
+                                        <th>Cas confirmés</th>
+                                        <th>Morts</th>
+                                        <th>Guéris</th>
+                                        <th>Taux de mortalité ( % )</th>
                                     </tr>
                                     </thead>
                                     <tbody id ='tbody'>
@@ -254,7 +254,7 @@
                     colors: ['transparent']
                 },
                 series: [{
-                    name: 'Confirmed Cases',
+                    name: 'Infectés',
                     data: confirmed
                 }],
                 xaxis: {
@@ -338,10 +338,10 @@
                     colors: ['transparent']
                 },
                 series: [{
-                    name: 'Death Counts',
+                    name: 'Nombre de décés',
                     data: death
                 }, {
-                    name: 'Number of Patients That Recover',
+                    name: 'Nombre de patients guéris',
                     data: recovered
                 }],
                 xaxis: {
