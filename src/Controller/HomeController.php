@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     public function index(Request $request)
     {
 
-        $country = $request->request->get('option');
+        $country = $request->request->get('country');
 
         $client = HttpClient::create();
 
