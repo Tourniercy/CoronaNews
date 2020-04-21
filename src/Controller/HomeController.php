@@ -44,7 +44,7 @@ class HomeController extends AbstractController
 
         $dataByDays = json_decode($data, true);
 
-        //Nom des pays
+        // Nom des pays
 
         $countries = array_keys($dataByDays);
 

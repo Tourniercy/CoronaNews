@@ -9,8 +9,8 @@
     <!--  BEGIN NAVBAR  -->
     <div class="header-container">
         <header class="header navbar navbar-expand-sm">
-            <div class="nav-logo align-self-center">
-                <a class="navbar-brand" href="#"><img src="{{ asset('images/logo.png') }}" /> <span class="navbar-brand-name">CoronaNews</span></a>
+            <div class="nav-logo align-self-center mt-2">
+                <a class="navbar-brand" href="#"><img src="{{ asset('images/corona-icon.svg') }}" /> <span class="navbar-brand-name">CoronaNews</span></a>
             </div>
         </header>
     </div>
@@ -72,7 +72,8 @@
                                             <img class="float-right" src="{{ asset('images/corona-icon.svg') }}"/>
                                         </div>
                                             </div>
-                                            <p class="w-value">{{ countryTable.Global.TotalConfirmed }} dans le monde</p>
+                                            <hr>
+                                            <p class="w-value">{{ countryTable.Global.TotalConfirmed | number_format(0, '', ' ') }} dans le monde</p>
                                         </div>
                                     </div>
                                     <div class="widget-content">
@@ -95,7 +96,8 @@
                                                     <img class="float-right" src="{{ asset('images/recovered.svg') }}"/>
                                                 </div>
                                             </div>
-                                            <p class="w-value">{{ countryTable.Global.TotalRecovered }} dans le monde</p>
+                                            <hr>
+                                            <p class="w-value">{{ countryTable.Global.TotalRecovered | number_format(0, '', ' ') }} dans le monde</p>
                                         </div>
 
 
@@ -113,13 +115,14 @@
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <h5 class="">Taux de létalité</h5>
+                                                    <h5 class="">Létalité</h5>
                                                     <p id = 'death' class="w-value">{{ deaths | round(2, 'floor') }} %</p>
                                                 </div>
                                                 <div class="col-6 pull-right">
                                                     <img class="float-right" style="width: 42px" src="{{ asset('images/cancel.svg') }}"/>
                                                 </div>
                                             </div>
+                                            <hr>
                                             <p class="w-value">{{ ((countryTable.Global.TotalDeaths/countryTable.Global.TotalConfirmed)*100)| round(2, 'floor') }} % dans le monde</p>
                                         </div>
                                     </div>
