@@ -18,7 +18,6 @@
 
     <!--  BEGIN MAIN CONTAINER  -->
     <div class="main-container" id="container">
-
         <div class="overlay"></div>
         <div class="search-overlay"></div>
 
@@ -73,6 +72,7 @@
                                             <img class="float-right" src="{{ asset('images/corona-icon.svg') }}"/>
                                         </div>
                                             </div>
+                                            <p class="w-value">{{ countryTable.Global.TotalConfirmed }} dans le monde</p>
                                         </div>
                                     </div>
                                     <div class="widget-content">
@@ -95,6 +95,7 @@
                                                     <img class="float-right" src="{{ asset('images/recovered.svg') }}"/>
                                                 </div>
                                             </div>
+                                            <p class="w-value">{{ countryTable.Global.TotalRecovered }} dans le monde</p>
                                         </div>
 
 
@@ -119,6 +120,7 @@
                                                     <img class="float-right" style="width: 42px" src="{{ asset('images/cancel.svg') }}"/>
                                                 </div>
                                             </div>
+                                            <p class="w-value">{{ ((countryTable.Global.TotalDeaths/countryTable.Global.TotalConfirmed)*100)| round(2, 'floor') }} % dans le monde</p>
                                         </div>
                                     </div>
                                 </div>
@@ -168,21 +170,22 @@
                                         <th>Morts</th>
                                         <th>Guéris</th>
                                         <th>Taux de mortalité ( % )</th>
+                                        <th>Nombre d'infectés pour 1000 personnes</th>
                                     </tr>
                                     </thead>
                                     <tbody id ='tbody'>
-                                    {% for i in data %}
+                                    {% for country in countryTable.Countries %}
                                     <tr>
-                                        <td>{{ i.0 }}</td>
-                                        <td>{{ i.confirmed }}</td>
-                                        <td>{{ i.deaths }}</td>
-                                        <td>{{ i.recovered }}</td>
-                                        <td>{{ (i.deaths / i.confirmed * 100) | round(2, 'floor') }} %</td>
+                                        <td>{{ country.Country }}</td>
+                                        <td>{{ country.TotalConfirmed }}</td>
+                                        <td>{{ country.TotalDeaths }}</td>
+                                        <td>{{ country.TotalRecovered }}</td>
+                                        <td>{% if country.TotalConfirmed > 0 %}{{ (country.TotalDeaths / country.TotalConfirmed * 100) | round(2, 'floor') }} %{% else %}0{% endif %}</td>
+                                        <td>{% if country.population is defined and country.population > 0%}{{ ((country.TotalConfirmed / country.population) * 1000)|round(2, 'floor') }}{% else %}0 (inconnu){% endif %}</td>
                                     </tr>
                                     {% endfor %}
                                     </tbody>
                                 </table>
-{#                                {{ knp_pagination_render(data) }}#}
                             </div>
                         </div>
                     </div>

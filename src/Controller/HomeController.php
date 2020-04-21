@@ -17,50 +17,69 @@ class HomeController extends AbstractController
     public function index(Request $request)
     {
 
+        // Liste des populations par code ISO pays
+
+        $client = HttpClient::create();
+
+        $response = $client->request('GET', 'https://gist.githubusercontent.com/gwillem/6ca8a81048e6f3721c3bafc803d44a72/raw/4fb66d18178c1a0fdf101fb6b03c4d21929472da/iso2_population.json');
+        $content = $response->getContent();
+        $populationByCountry = json_decode($content, true);
+
+        // Cas par pays
+
+        $client = HttpClient::create();
+
+        $response = $client->request('GET', 'https://api.covid19api.com/summary');
+        $countryTable = $response->toArray();
+//        dd($countryTable['Global']);
+        foreach ($countryTable['Countries'] as &$country) {
+            $country['population'] = $populationByCountry[$country['CountryCode']];
+        }
+
+        // Cas du premier pays par jour
         $client = HttpClient::create();
 
         $response = $client->request('GET', 'https://pomber.github.io/covid19/timeseries.json');
         $data = $response->getContent();
 
-        $decodedData = json_decode($data, true);
+        $dataByDays = json_decode($data, true);
 
-        $countries = array_keys($decodedData);
+        //Nom des pays
 
-        $defaultCountry = array_key_first($decodedData);
+        $countries = array_keys($dataByDays);
 
-        foreach($decodedData[$defaultCountry] as $value){
+        $defaultCountry = array_key_first($dataByDays);
 
-          $infected = $value['confirmed'];
-          $recovered = $value['recovered'];
-          $deaths = $value['deaths'];
-        }
+        $infected = end($dataByDays[$defaultCountry])['confirmed'];
+        $recovered = end($dataByDays[$defaultCountry])['recovered'];
+        $deaths = end($dataByDays[$defaultCountry])['deaths'];
+
+        $fatality = ($deaths / $infected) * 100;
 
         $array = [];
 
-        foreach($decodedData as $key => $value){
+        foreach($dataByDays as $key => $value){
 
           $lastData = end($value);
-          array_push($lastData, $key);
+          $lastData['country'] = $key;
           $array[$key] = $lastData;
         }
 
-        $fatality = ($deaths / $infected) * 100;
 
         // NEWS SECTION
 
         $response = $client->request('GET', 'http://newsapi.org/v2/top-headlines?country=fr&category=health&q=covid&apiKey=154a3122f10644b5ada441ea0aa94fe3');
-
-        $content = $response->toArray();
-//        dd($decodedData[$defaultCountry]);
+        $articles = $response->toArray();
         return $this->render('home/index.html.twig', [
 
           'data' => $array,
-          'stats' => $decodedData[$defaultCountry],
+          'stats' => $dataByDays[$defaultCountry],
           'infected' => $infected,
           'recovered' => $recovered,
           'deaths' => $fatality,
           'countries' => $countries,
-          'articles' => $content,
+          'articles' => $articles,
+          'countryTable' => $countryTable  ,
         ]);
     }
 
@@ -84,10 +103,6 @@ class HomeController extends AbstractController
             $recovered = $value['recovered'];
             $deaths = $value['deaths'];
           }
-
-
-//        $fatality = ($deaths / $infected) * 100;
-//        return $this->json(['infected' => $infected,'recovered' => $recovered,'deaths' => $deaths,'fatality' => round($fatality,2)]);
 
         $fatality = ($deaths / $infected) * 100;
         return $this->json(['infected' => $infected,'recovered' => $recovered,'deaths' => $deaths,'fatality' => round($fatality,2),'data' => $decodedData[$country]]);
