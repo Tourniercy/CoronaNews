@@ -88,7 +88,6 @@ class HomeController extends AbstractController
     */
     public function changeCountry(Request $request)
     {
-
         $country = $request->request->get('country');
 
         $client = HttpClient::create();
@@ -98,11 +97,9 @@ class HomeController extends AbstractController
 
         $decodedData = json_decode($data, true);
 
-          foreach($decodedData[$country] as $value){
-            $infected = $value['confirmed'];
-            $recovered = $value['recovered'];
-            $deaths = $value['deaths'];
-          }
+        $infected = end($decodedData[$country])['confirmed'];
+        $recovered = end($decodedData[$country])['recovered'];
+        $deaths = end($decodedData[$country])['deaths'];
 
         $fatality = ($deaths / $infected) * 100;
         return $this->json(['infected' => $infected,'recovered' => $recovered,'deaths' => $deaths,'fatality' => round($fatality,2),'data' => $decodedData[$country]]);
