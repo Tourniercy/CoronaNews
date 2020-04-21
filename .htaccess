@@ -1,3 +1,11 @@
 <IfModule mod_rewrite.c>
-    Redirect 301 / http://coronanews48.herokuapp.com/public/
+    RewriteEngine on
+    RewriteCond %{REQUEST_URI} !^public
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        RedirectMatch 302 ^/$ /index.php/
+    </IfModule>
 </IfModule>
