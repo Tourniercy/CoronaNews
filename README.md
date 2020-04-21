@@ -7,17 +7,18 @@ Ce projet a été realisé dans le but de collecter des données en temps réel 
 Backend : Symfony
 Frontend : Html5 x Bootstrap
 
-Les graph ont été generer grace à ApexCharts
+Les graphs ont été réalisés avec ApexCharts
 
-APIs utilisés :
-- https://gist.github.com/gwillem/6ca8a81048e6f3721c3bafc803d44a72 pour obtenir la population total en fonction du code iso d'un pays
+
+APIs utilisées :
+- https://gist.github.com/gwillem/6ca8a81048e6f3721c3bafc803d44a72 pour obtenir la population total d'un pays en fonction de son code ISO
 ```json
 {
   "countryName": "Population",
   "AD": "84000",
 }
 ```
-- https://api.covid19api.com/summary pour obtenir les stats global d'un pays pour construire le tableau des stats
+- https://api.covid19api.com/summary pour obtenir les stats global de tous les pays afin de construire le tableau des stats par pays
 ```json
 {
   "Country":"Afghanistan",
@@ -32,7 +33,7 @@ APIs utilisés :
   "Date":"2020-04-21T09:45:44Z"
 }
 ```
-- https://pomber.github.io/covid19/timeseries.json pour obtenir les stats jour par jour d'un pays afin de contruire les graph
+- https://pomber.github.io/covid19/timeseries.json pour obtenir les stats journalières d'un pays afin de contruire les graphs
 ```json
 {
   "Afghanistan": [
