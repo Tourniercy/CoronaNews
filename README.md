@@ -2,7 +2,7 @@
 
 ![CoronaNews](https://github.com/Ervin11/CoronaNews/blob/Ervin/view.png)
 
-Ce projet a été realisé dans le but de collecter des données en temps réel sur les stats du Covid 19.
+Ce projet a été realisé dans le but de collecter des données en temps réel sur les stats du Covid 19 et d'informer sur son impact mondial.
 
 Backend : Symfony
 Frontend : Html5 x Bootstrap
