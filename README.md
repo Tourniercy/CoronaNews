@@ -13,7 +13,7 @@ APIs utilisés :
 - https://gist.github.com/gwillem/6ca8a81048e6f3721c3bafc803d44a72 pour obtenir la population total en fonction du code iso d'un pays
 ```json
 {
-  countryName: Population
+  "countryName": "Population",
   "AD": "84000",
 }
 ```
